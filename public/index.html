@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/farmbot.js"></script>
+  </head>
+  <body>
+    <!-- <form id='dummy'> -->
+      EMAIL<br>
+      <input type='email' id='email'><br>
+      PASSWORD<br>
+      <input type='password' id='password'><br>
+      <button id='login'>Login!</button><br>
+      <button id='device'>Device?</button><br>
+    <!-- </form> -->
+    <hr/>
+    <div id='div1'></div>
+    <hr/>
+    <div id='token'></div>
+    <hr/>
+
+    <script>
+    $( "#login" ).click(function() {
+      $('#div1').html('working...');
+      $.ajax({
+      url: "https://my.farmbot.io/api/tokens",
+      type: "POST",
+      data: JSON.stringify({user: {email: $('#email').val(), password: $('#password').val()}}),
+      contentType: "application/json",
+      success: function (data) {
+                   // You can now use your token:
+                   var MY_SHINY_TOKEN = data.token.encoded;
+                   $('#token').html(MY_SHINY_TOKEN);
+                   $('#div1').html(JSON.stringify(data));
+               }
+      });
+      return false;
+    });
+    $( "#device" ).click(function() {
+      bot = new Farmbot.Farmbot({token:$('#token')});
+
+      bot.connect();
+
+      // $('#div1').html('working...');
+      // $.ajax({
+      // url: "https://my.farmbot.io/api/device",
+      // type: "GET",
+      // beforeSend: function(request) {
+      //   request.setRequestHeader("Authorization", $('#token').html());
+      // },
+      // contentType: "application/json",
+      // success: function (data) {
+      //              $('#div1').html(JSON.stringify(data));
+      //          }
+      // });
+      // return false;
+    });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+use browserify to generate the js here:
+
+$ browserify src/js/farmbot.js -o public/js/farmbot.js

@@ -1,0 +1,19 @@
+{
+  "name": "farmbot-simple-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "atob": "^2.0.3",
+    "browserify": "^14.4.0",
+    "farmbot": "^4.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify src/js/farmbot.js -o public/js/farmbot.js",
+    "ls": "ls"
+  },
+  "author": "",
+  "license": "ISC"
+}
