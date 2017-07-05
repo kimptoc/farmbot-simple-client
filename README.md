@@ -9,3 +9,5 @@ https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af )
 Next, find out if bot is online and trigger a sequence
 
 Or maybe trigger basic moves/pin changes?
+
+Also- use local storage to remember email/token and maybe password (secure?)
