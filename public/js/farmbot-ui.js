@@ -21,6 +21,20 @@
     }
 
 
+    FarmbotUI.prototype.sequences = function(token, callback){
+        $.ajax({
+            url: "https://my.farmbot.io/api/sequences",
+            type: "GET",
+            contentType: "application/json",
+            beforeSend: function(request) {
+              request.setRequestHeader("Authorization", token);
+            },
+            success: function (data) {
+                     // You can now use your token:
+                     callback({sequences:data});
+                 }
+        })
+    }
 
     root.FarmbotUI = FarmbotUI;
 

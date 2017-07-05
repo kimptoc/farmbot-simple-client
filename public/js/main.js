@@ -9,13 +9,24 @@ $(function() {
         });
       return false;
     });
+    $( "#sequences" ).click(function() {
+      $('#div1').html('working...');
+        botui.sequences($('#token').html(), function(response) {
+            $.each(response.sequences, function(index, sequence){
+                $('#sequence_list').append('<div>'+sequence.name+'/'+sequence.id+'</div>')
+//                console.log(sequence.name);
+            })
+            $('#div1').html('Sequences loaded!');
+
+//                   console.log(JSON.stringify(response.sequences));
+        });
+      return false;
+    });
     $( "#device" ).click(function() {
       $('#div1').html('working...');
       bot = new Farmbot.Farmbot({token:$('#token').html(), secure: true});
 
       bot.connect();
-
-
 
       $('#div1').html('connected!');
 
@@ -24,20 +35,6 @@ $(function() {
           console.log("This is the payload: " + data);
         })
 
-      // $('#div1').html(bot.getState());
-      // $('#div1').html('working...');
-      // $.ajax({
-      // url: "https://my.farmbot.io/api/device",
-      // type: "GET",
-      // beforeSend: function(request) {
-      //   request.setRequestHeader("Authorization", $('#token').html());
-      // },
-      // contentType: "application/json",
-      // success: function (data) {
-      //              $('#div1').html(JSON.stringify(data));
-      //          }
-      // });
-      // return false;
     });
 
 });

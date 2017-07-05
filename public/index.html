@@ -1,19 +1,24 @@
 <html>
   <head>
+      <title>Farmbot Simple</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/farmbot-browserified.js"></script>
     <script type="text/javascript" src="js/farmbot-ui.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
   </head>
   <body>
-    <!-- <form id='dummy'> -->
+
       EMAIL<br>
       <input type='email' id='email'><br>
       PASSWORD<br>
       <input type='password' id='password'><br>
       <button id='login'>Login!</button><br>
       <button id='device'>Connect to Farmbot</button><br>
-    <!-- </form> -->
+      <button id='sequences'>Get sequences</button><br>
+
+    <hr/>
+      <div id="sequence_list"></div>
+
     <hr/>
     <div id='div1'></div>
     <hr/>
