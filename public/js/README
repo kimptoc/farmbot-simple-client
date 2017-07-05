@@ -1,3 +1,6 @@
 use browserify to generate the js here:
 
-$ npm run build
+$ npm run browserify
+
+But doesn't always work - so you might need to run command yourself.
+

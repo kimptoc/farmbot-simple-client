@@ -1,5 +1,20 @@
 $(function() {
 
+    function buildButton(name, id){
+        return '<div><button id="sequence-'+id+'" sequence-id="'+id+'" class="trigger-sequence">'+name+'</button></div>';
+    }
+
+    function enableSequenceButtons() {
+        $(".trigger-sequence" ).off("click");
+        $(".trigger-sequence" ).on("click",function(data) {
+//            console.log(JSON.stringify(data));
+            var sequenceId = $(this).attr('sequence-id');
+            console.log("Will execute sequence:"+$(this).html()+"/"+sequenceId);
+            bot.execSequence(sequenceId);
+          return false;
+        });
+    }
+
     $( "#login" ).click(function() {
       $('#div1').html('working...');
         botui = new FarmbotUI()
@@ -9,11 +24,14 @@ $(function() {
         });
       return false;
     });
+
     $( "#sequences" ).click(function() {
       $('#div1').html('working...');
         botui.sequences($('#token').html(), function(response) {
             $.each(response.sequences, function(index, sequence){
-                $('#sequence_list').append('<div>'+sequence.name+'/'+sequence.id+'</div>')
+//                $('#sequence_list').append('<div>'+sequence.name+'/'+sequence.id+'</div>')
+                $('#sequence_list').append(buildButton(sequence.name,sequence.id))
+                enableSequenceButtons();
 //                console.log(sequence.name);
             })
             $('#div1').html('Sequences loaded!');
@@ -28,7 +46,7 @@ $(function() {
 
       bot.connect();
 
-      $('#div1').html('connected!');
+      $('#div1').html('connected! Status:'+bot.hardware.informational_settings.sync_status);
 
       bot.on("*", function(data, eventName) {
           console.log("I just got an" + eventName + " event!");
