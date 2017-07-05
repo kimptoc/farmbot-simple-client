@@ -1,7 +1,9 @@
 <html>
   <head>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/farmbot-browserify.js"></script>
+    <script type="text/javascript" src="js/farmbot-browserified.js"></script>
+    <script type="text/javascript" src="js/farmbot-ui.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
   </head>
   <body>
     <!-- <form id='dummy'> -->
@@ -19,52 +21,6 @@
     <hr/>
 
     <script>
-    $( "#login" ).click(function() {
-      $('#div1').html('working...');
-      $.ajax({
-      url: "https://my.farmbot.io/api/tokens",
-      type: "POST",
-      data: JSON.stringify({user: {email: $('#email').val(), password: $('#password').val()}}),
-      contentType: "application/json",
-      success: function (data) {
-                   // You can now use your token:
-                   var MY_SHINY_TOKEN = data.token.encoded;
-                   $('#token').html(MY_SHINY_TOKEN);
-                   $('#div1').html(JSON.stringify(data));
-               }
-      });
-      return false;
-    });
-    $( "#device" ).click(function() {
-      $('#div1').html('working...');
-      bot = new Farmbot.Farmbot({token:$('#token').html(), secure: true});
-
-      bot.connect();
-
-
-
-      $('#div1').html('connected!');
-
-      bot.on("*", function(data, eventName) {
-          console.log("I just got an" + eventName + " event!");
-          console.log("This is the payload: " + data);
-        })
-
-      // $('#div1').html(bot.getState());
-      // $('#div1').html('working...');
-      // $.ajax({
-      // url: "https://my.farmbot.io/api/device",
-      // type: "GET",
-      // beforeSend: function(request) {
-      //   request.setRequestHeader("Authorization", $('#token').html());
-      // },
-      // contentType: "application/json",
-      // success: function (data) {
-      //              $('#div1').html(JSON.stringify(data));
-      //          }
-      // });
-      // return false;
-    });
     </script>
   </body>
 </html>
