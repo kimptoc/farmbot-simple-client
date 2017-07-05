@@ -11,3 +11,7 @@ Next, find out if bot is online and trigger a sequence
 Or maybe trigger basic moves/pin changes?
 
 Also- use local storage to remember email/token and maybe password (secure?)
+
+Other features:
+- show current x,y,z, pins off/on
+- use jquery mobile ui ?
