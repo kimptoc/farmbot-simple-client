@@ -37,7 +37,7 @@
     });
     $( "#device" ).click(function() {
       $('#div1').html('working...');
-      bot = new Farmbot.Farmbot({token:$('#token').html()});
+      bot = new Farmbot.Farmbot({token:$('#token').html(), secure: true});
 
       bot.connect();
 

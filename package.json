@@ -5,13 +5,16 @@
   "main": "index.js",
   "dependencies": {
     "atob": "^2.0.3",
-    "farmbot": "^4.0.7"
+    "farmbot": "^4.0.7",
+    "finalhandler": "^1.0.3",
+    "serve-static": "^1.12.3"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "browserify src/js/farmbot.js -o public/js/farmbot.js",
-    "ls": "ls"
+    "ls": "ls",
+    "start":"node index.js"
   },
   "author": "",
   "license": "ISC"
