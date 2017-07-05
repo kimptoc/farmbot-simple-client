@@ -5,7 +5,6 @@
   "main": "index.js",
   "dependencies": {
     "atob": "^2.0.3",
-    "browserify": "^14.4.0",
     "farmbot": "^4.0.7"
   },
   "devDependencies": {},

@@ -36,10 +36,12 @@
       return false;
     });
     $( "#device" ).click(function() {
-      bot = new Farmbot.Farmbot({token:$('#token')});
+      $('#div1').html('working...');
+      bot = new Farmbot.Farmbot({token:$('#token').html()});
 
       bot.connect();
 
+      $('#div1').html('connected!');
       // $('#div1').html('working...');
       // $.ajax({
       // url: "https://my.farmbot.io/api/device",
