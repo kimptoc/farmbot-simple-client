@@ -22,9 +22,14 @@ $(function() {
         $(".trigger-sequence" ).off("click");
         $(".trigger-sequence" ).on("click",function(data) {
 //            console.log(JSON.stringify(data));
-            var sequenceId = $(this).attr('sequence-id');
-            console.log("Will execute sequence:"+$(this).html()+"/"+sequenceId);
-            bot.execSequence(sequenceId);
+            var sequenceId = Number($(this).attr('sequence-id'));
+            var name = $(this).html();
+            console.log("Will execute sequence:"+ name+"/"+sequenceId);
+            var execPromise = bot.sync()
+                .then(function(){bot.execSequence(sequenceId);})
+                .then(function(){console.log("Sequence "+name+" has been triggered.")});
+
+            console.log(execPromise);
           return false;
         });
     }
@@ -38,7 +43,7 @@ $(function() {
           botui.login($('#email').val(),$('#password').val(), function(response) {
               localStorage.setItem('fb.token',response.token);
               $('#div1').html(JSON.stringify(response.raw_response));
-              bot = new Farmbot.Farmbot({token:localStorage.getItem('fb.token'), secure: true});
+              bot = new Farmbot.Farmbot({token:localStorage.getItem('fb.token'), secure: true, timeout: 30000});
               bot.connect();
           });
     }
@@ -51,11 +56,10 @@ $(function() {
     $( "#sequences" ).click(function() {
       $('#div1').html('working...');
         botui.sequences(localStorage.getItem('fb.token'), function(response) {
+            $('#sequence_list').empty();
             $.each(response.sequences, function(index, sequence){
-//                $('#sequence_list').append('<div>'+sequence.name+'/'+sequence.id+'</div>')
                 $('#sequence_list').append(buildButton(sequence.name,sequence.id))
                 enableSequenceButtons();
-//                console.log(sequence.name);
             })
             $('#div1').html('Sequences loaded!');
 
