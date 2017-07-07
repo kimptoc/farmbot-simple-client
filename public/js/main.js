@@ -24,12 +24,17 @@ $(function() {
         $(".trigger-sequence" ).off("click");
         $(".trigger-sequence" ).on("click",function(data) {
 //            console.log(JSON.stringify(data));
+            $(this).prop('disabled', true);
+
             var sequenceId = Number($(this).attr('sequence-id'));
             var name = $(this).html();
             console.log("Will execute sequence:"+ name+"/"+sequenceId);
             var execPromise = bot.sync()
                 .then(function(){bot.execSequence(sequenceId);})
-                .then(function(){console.log("Sequence "+name+" has been triggered.")});
+                .then(function(){
+                    console.log("Sequence "+name+" has been triggered.");
+                    $(this).prop('disabled', false);
+                });
 
             console.log(execPromise);
           return false;
@@ -40,6 +45,7 @@ $(function() {
         $('#div1').html('working...');
           botui.sequences(localStorage.getItem('fb.token'), function(response) {
               $('#sequence_list').empty();
+              $('#sequence_list').append("Available Sequences:");
               $.each(response.sequences, function(index, sequence){
                   $('#sequence_list').append(buildButton(sequence.name,sequence.id))
                   enableSequenceButtons();
@@ -79,6 +85,10 @@ $(function() {
     });
     $( "#arduino_led" ).click(function() {
         bot.togglePin({pin_number: 13});
+    });
+    $( "#logout" ).click(function() {
+        $('#login-bit').slideDown();
+        $('#main-bit').slideUp();
     });
     $( "#device" ).click(function() {
       $('#div1').html('working...');

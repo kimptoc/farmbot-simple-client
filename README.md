@@ -8,18 +8,18 @@ https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af )
 
 
 TODO:
-- use jquery mobile ui / nice buttons ?
 - or just show specific sequences... with a 'show all' option
 - e-stop button
 - basic manual move buttons
 - device status - online/offline?
-- error handling!
+- error handling! login failed , exec seq, pin change etc
 - show current x,y,z, pins off/on
-- hide login part if logged in
-- hide other part if not logged in/login failed
 
 
 DONE:
 - trigger a sequence
 - trigger basic pin changes?
 - use local storage to remember email/token and maybe password (secure?)
+- use jquery mobile ui / nice buttons ?
+- hide login part if logged in
+- hide other part if not logged in/login failed

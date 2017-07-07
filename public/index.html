@@ -7,26 +7,28 @@
     <script type="text/javascript" src="js/main.js"></script>
       <!-- buttons thanks to http://unicorn-ui.com/buttons/ -->
     <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/form.css">
   </head>
   <body>
 
-  <div id="login-bit">
+  <div id="login-bit" class="form-style-2">
       EMAIL<br>
-      <input type='email' id='email'><br>
+      <label for="email"><input type='email' id='email' class="input-field"><br></label>
       PASSWORD<br>
-      <input type='password' id='password'><br>
+      <label for="password"><input type='password' id='password' class="input-field"><br></label>
       <button id='login' class="button button-raised button-royal button-pill">Login!</button><br>
   </div>
 
   <div id="main-bit">
-      <button id='sequences' class="button button-raised button-primary button-pill">Refresh sequences</button><br>
 
     <hr/>
       <div id="sequence_list"></div>
 
     <hr/>
+      <button id='sequences' class="button button-raised button-primary button-pill">Refresh sequences</button><br>
       <button id='device' class="button button-raised button-primary button-pill">Subscribe to ALL Farmbot events</button><br>
       <button id='arduino_led' class="button button-raised button-pill button-action">Toggle Arduino LED</button><br>
+      <button id='logout' class="button button-raised button-pill button-caution">Logout</button><br>
       <hr/>
     <div id='div1'></div>
     <hr/>
