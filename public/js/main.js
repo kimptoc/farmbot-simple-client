@@ -7,6 +7,8 @@ $(function() {
         }
         return val;
     }
+    $('#main-bit').hide();
+
     var email = setFieldFromLocalStorage('#email','fb.email');
     var passwd = setFieldFromLocalStorage('#password','fb.password');
 
@@ -15,7 +17,7 @@ $(function() {
     }
 
     function buildButton(name, id){
-        return '<div><button id="sequence-'+id+'" sequence-id="'+id+'" class="trigger-sequence">'+name+'</button></div>';
+        return '<div><button id="sequence-'+id+'" sequence-id="'+id+'" class="trigger-sequence button button-raised button-action button-pill">'+name+'</button></div>';
     }
 
     function enableSequenceButtons() {
@@ -34,6 +36,21 @@ $(function() {
         });
     }
 
+    function getSequences(){
+        $('#div1').html('working...');
+          botui.sequences(localStorage.getItem('fb.token'), function(response) {
+              $('#sequence_list').empty();
+              $.each(response.sequences, function(index, sequence){
+                  $('#sequence_list').append(buildButton(sequence.name,sequence.id))
+                  enableSequenceButtons();
+              })
+              $('#div1').html('Sequences loaded!');
+
+  //                   console.log(JSON.stringify(response.sequences));
+          });
+
+    }
+
     function doLogin(){
         localStorage.setItem('fb.email',$('#email').val());
         localStorage.setItem('fb.password',$('#password').val());
@@ -45,6 +62,9 @@ $(function() {
               $('#div1').html(JSON.stringify(response.raw_response));
               bot = new Farmbot.Farmbot({token:localStorage.getItem('fb.token'), secure: true, timeout: 30000});
               bot.connect();
+              getSequences();
+              $('#login-bit').slideUp();
+              $('#main-bit').slideDown();
           });
     }
 
@@ -54,17 +74,7 @@ $(function() {
     });
 
     $( "#sequences" ).click(function() {
-      $('#div1').html('working...');
-        botui.sequences(localStorage.getItem('fb.token'), function(response) {
-            $('#sequence_list').empty();
-            $.each(response.sequences, function(index, sequence){
-                $('#sequence_list').append(buildButton(sequence.name,sequence.id))
-                enableSequenceButtons();
-            })
-            $('#div1').html('Sequences loaded!');
-
-//                   console.log(JSON.stringify(response.sequences));
-        });
+        getSequences();
       return false;
     });
     $( "#arduino_led" ).click(function() {
