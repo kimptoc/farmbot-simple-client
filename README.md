@@ -8,15 +8,16 @@ https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af )
 
 
 TODO:
+- buttons triggering 1pass to save password. Name login fields differently
 - or just show specific sequences... with a 'show all' option
 - e-stop button
 - basic manual move buttons
 - device status - online/offline?
-- error handling! login failed , exec seq, pin change etc
 - show current x,y,z, pins off/on
 
 
 DONE:
+- error handling! login failed , exec seq, pin change etc
 - trigger a sequence
 - trigger basic pin changes?
 - use local storage to remember email/token and maybe password (secure?)
