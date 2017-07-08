@@ -24,16 +24,24 @@ $(function() {
         $(".trigger-sequence" ).off("click");
         $(".trigger-sequence" ).on("click",function(data) {
 //            console.log(JSON.stringify(data));
-            $(this).prop('disabled', true);
+            var execButton = $(this);
+            execButton.prop('disabled', true);
 
-            var sequenceId = Number($(this).attr('sequence-id'));
-            var name = $(this).html();
-            console.log("Will execute sequence:"+ name+"/"+sequenceId);
+            var sequenceId = Number(execButton.attr('sequence-id'));
+            var name = execButton.html();
+            $('#message').html("Executing sequence:"+ name);
             var execPromise = bot.sync()
-                .then(function(){bot.execSequence(sequenceId);})
                 .then(function(){
-                    console.log("Sequence "+name+" has been triggered.");
-                    $(this).prop('disabled', false);
+                    bot.execSequence(sequenceId);
+                })
+                .then(function(){
+                    $('#message').html("Sequence "+name+" has been triggered.");
+                    execButton.prop('disabled', false);
+                })
+                .catch(function(error){
+//                    console.log("Got an error..."+error);
+                    $('#message').html("Sequence:"+ name+". "+error);
+                    execButton.prop('disabled', false);
                 });
 
             console.log(execPromise);
@@ -42,35 +50,47 @@ $(function() {
     }
 
     function getSequences(){
-        $('#div1').html('working...');
-          botui.sequences(localStorage.getItem('fb.token'), function(response) {
-              $('#sequence_list').empty();
-              $('#sequence_list').append("Available Sequences:");
-              $.each(response.sequences, function(index, sequence){
-                  $('#sequence_list').append(buildButton(sequence.name,sequence.id))
-                  enableSequenceButtons();
-              })
-              $('#div1').html('Sequences loaded!');
+        $('#sequences').prop('disabled', true);
+        $('#message').html('Loading sequences...');
+          botui.sequences(localStorage.getItem('fb.token'), function(err, response) {
+              $('#sequences').prop('disabled', false);
+              if (err) {
+                  $('#message').html(err);
+              } else {
+                  $('#sequence_list').empty();
+                  $('#sequence_list').append("<h3>Available Sequences:</h3>");
+                  $.each(response.sequences, function (index, sequence) {
+                      $('#sequence_list').append(buildButton(sequence.name, sequence.id))
+                      enableSequenceButtons();
+                  })
+                  $('#message').html('Sequences loaded!');
 
-  //                   console.log(JSON.stringify(response.sequences));
+                  //                   console.log(JSON.stringify(response.sequences));
+              }
           });
 
     }
 
     function doLogin(){
+        $('#login').prop('disabled', true);
         localStorage.setItem('fb.email',$('#email').val());
         localStorage.setItem('fb.password',$('#password').val());
 
-        $('#div1').html('working...');
+        $('#message').html('Logging in...');
           botui = new FarmbotUI()
-          botui.login($('#email').val(),$('#password').val(), function(response) {
-              localStorage.setItem('fb.token',response.token);
-              $('#div1').html(JSON.stringify(response.raw_response));
-              bot = new Farmbot.Farmbot({token:localStorage.getItem('fb.token'), secure: true, timeout: 30000});
-              bot.connect();
-              getSequences();
-              $('#login-bit').slideUp();
-              $('#main-bit').slideDown();
+          botui.login($('#email').val(),$('#password').val(), function(err, response) {
+              $('#login').prop('disabled', false);
+              if (err) {
+                  $('#message').html(err);
+              } else {
+                  localStorage.setItem('fb.token', response.token);
+                  $('#debug').html(JSON.stringify(response.raw_response));
+                  bot = new Farmbot.Farmbot({token: localStorage.getItem('fb.token'), secure: true, timeout: 30000});
+                  bot.connect();
+                  getSequences();
+                  $('#login-bit').slideUp();
+                  $('#main-bit').slideDown();
+              }
           });
     }
 
@@ -91,9 +111,9 @@ $(function() {
         $('#main-bit').slideUp();
     });
     $( "#device" ).click(function() {
-      $('#div1').html('working...');
+      $('#message').html('working...');
 
-//      $('#div1').html('connected! Status:'+bot.hardware.informational_settings.sync_status);
+//      $('#message').html('connected! Status:'+bot.hardware.informational_settings.sync_status);
 
       bot.on("*", function(data, eventName) {
           console.log("I just got an" + eventName + " event!");

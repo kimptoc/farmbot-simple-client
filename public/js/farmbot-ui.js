@@ -15,8 +15,11 @@
           success: function (data) {
                    // You can now use your token:
                    var MY_SHINY_TOKEN = data.token.encoded;
-                   callback({token:MY_SHINY_TOKEN, raw_response:data});
-               }
+                   callback(null, {token:MY_SHINY_TOKEN, raw_response:data});
+               },
+          error: function( jqXHR, textStatus, errorThrown ) {
+              callback(jqXHR.responseText, null);
+          }
       });
     }
 
@@ -31,8 +34,11 @@
             },
             success: function (data) {
                      // You can now use your token:
-                     callback({sequences:data});
-                 }
+                     callback(null, {sequences:data});
+                 },
+            error: function( jqXHR, textStatus, errorThrown ) {
+                callback(jqXHR.responseText, null);
+            }
         })
     }
 

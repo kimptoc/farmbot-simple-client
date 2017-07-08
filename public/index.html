@@ -5,13 +5,15 @@
     <script type="text/javascript" src="js/farmbot-browserified.js"></script>
     <script type="text/javascript" src="js/farmbot-ui.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
-      <!-- buttons thanks to http://unicorn-ui.com/buttons/ -->
+      <!-- button styles thanks to http://unicorn-ui.com/buttons/ -->
     <link rel="stylesheet" href="css/buttons.css">
+      <!-- form style thanks to https://www.sanwebe.com/2014/08/css-html-forms-designs#form-1-html -->
     <link rel="stylesheet" href="css/form.css">
   </head>
   <body>
 
   <div id="login-bit" class="form-style-2">
+      <h1>Login</h1>
       EMAIL<br>
       <label for="email"><input type='email' id='email' class="input-field"><br></label>
       PASSWORD<br>
@@ -19,9 +21,11 @@
       <button id='login' class="button button-raised button-royal button-pill">Login!</button><br>
   </div>
 
-  <div id="main-bit">
+  <h3 id='message' style="border: 1px solid blue; padding: 3px"></h3>
 
-    <hr/>
+  <div id="main-bit">
+      <h1>Options</h1>
+
       <div id="sequence_list"></div>
 
     <hr/>
@@ -30,9 +34,10 @@
       <button id='arduino_led' class="button button-raised button-pill button-action">Toggle Arduino LED</button><br>
       <button id='logout' class="button button-raised button-pill button-caution">Logout</button><br>
       <hr/>
-    <div id='div1'></div>
-    <hr/>
   </div>
-
+  <div style="margin: 5px">
+<div id='info'></div>
+<div id='debug' hidden="true"></div>
+  </div>
   </body>
 </html>
