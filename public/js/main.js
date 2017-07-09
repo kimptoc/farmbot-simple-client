@@ -86,7 +86,10 @@ $(function() {
                   localStorage.setItem('fb.token', response.token);
                   $('#debug').html(JSON.stringify(response.raw_response));
                   bot = new Farmbot.Farmbot({token: localStorage.getItem('fb.token'), secure: true, timeout: 30000});
-                  bot.connect();
+                  bot.connect()
+                      .then(function(){
+                        device = new DeviceStatus(bot, '#device_status');
+                  });
                   getSequences();
                   $('#login-bit').slideUp();
                   $('#main-bit').slideDown();
