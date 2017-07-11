@@ -29,18 +29,18 @@ $(function() {
 
             var sequenceId = Number(execButton.attr('sequence-id'));
             var name = execButton.html();
-            $('#message').html("Executing sequence:"+ name);
+            $('#message').html("Executing sequence:'"+ name+"'");
             var execPromise = bot.sync()
                 .then(function(){
                     bot.execSequence(sequenceId);
                 })
                 .then(function(){
-                    $('#message').html("Sequence "+name+" has been triggered.");
+                    $('#message').html("Sequence '"+name+"' has been triggered.");
                     execButton.prop('disabled', false);
                 })
                 .catch(function(error){
 //                    console.log("Got an error..."+error);
-                    $('#message').html("Sequence:"+ name+". "+error);
+                    $('#message').html("Sequence:'"+ name+"'. "+error);
                     execButton.prop('disabled', false);
                 });
 
