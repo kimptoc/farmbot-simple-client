@@ -44,7 +44,7 @@ $(function() {
                     execButton.prop('disabled', false);
                 });
 
-            console.log(execPromise);
+            log(execPromise);
           return false;
         });
     }
@@ -119,8 +119,8 @@ $(function() {
 //      $('#message').html('connected! Status:'+bot.hardware.informational_settings.sync_status);
 
       bot.on("*", function(data, eventName) {
-          console.log("I just got an" + eventName + " event!");
-          console.log("This is the payload: " + JSON.stringify(data));
+          log("I just got a(n) " + eventName + " event!");
+          log("This is the payload: " + JSON.stringify(data));
         })
 
     });
