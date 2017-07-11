@@ -113,6 +113,34 @@ $(function() {
         $('#login-bit').slideDown();
         $('#main-bit').slideUp();
     });
+    $( "#goto_home" ).click(function() {
+      $('#message').html('Moving to home...');
+        bot.moveAbsolute({x:0, y:0, z:0});
+    });
+    $( "#move_x_higher" ).click(function() {
+      $('#message').html('Moving to X 100 forward...');
+        bot.moveRelative({x:+100, y:0, z:0});
+    });
+    $( "#move_x_lower" ).click(function() {
+      $('#message').html('Moving to X 100 back...');
+        bot.moveRelative({x:-100, y:0, z:0});
+    });
+    $( "#move_y_higher" ).click(function() {
+      $('#message').html('Moving to Y 100 forward...');
+        bot.moveRelative({x:0, y:+100, z:0});
+    });
+    $( "#move_y_lower" ).click(function() {
+      $('#message').html('Moving to Y 100 back...');
+        bot.moveRelative({x:0, y:-100, z:0});
+    });
+    $( "#move_z_higher" ).click(function() {
+      $('#message').html('Moving to Z 100 forward...');
+        bot.moveRelative({x:0, y:0, z:+100});
+    });
+    $( "#move_z_lower" ).click(function() {
+      $('#message').html('Moving to Z 100 back...');
+        bot.moveRelative({x:0, y:0, z:-100});
+    });
     $( "#device" ).click(function() {
       $('#message').html('working...');
 
@@ -122,8 +150,8 @@ $(function() {
           log("I just got a(n) " + eventName + " event!");
           log("This is the payload: " + JSON.stringify(data));
         })
-
     });
+
 
 });
 
