@@ -16,8 +16,9 @@
                 this_device_status.y = data.location[1];
                 this_device_status.z = data.location[2];
             }
-//            log("I just got a(n) " + eventName + " event!");
-//            log("This is the payload: " + JSON.stringify(data));
+            log("Got event " + eventName);
+            log("Payload: " + JSON.stringify(data));
+            log(data);
             if (this_device_status.timeoutId) clearTimeout(this_device_status.timeoutId);
             if (this_device_status.timeoutIdPing) clearTimeout(this_device_status.timeoutIdPing);
             $(this_device_status.status_element).html('Device online [X:'+this_device_status.x+", Y:"+this_device_status.y+", Z:"+this_device_status.z+"]");
