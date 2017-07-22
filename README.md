@@ -15,6 +15,8 @@ TODO:
 - device status - online/offline?
 - show current x,y,z, pins off/on
 
+Ideas...
+https://www.smashingmagazine.com/2017/07/designing-perfect-slider/
 
 DONE:
 - error handling! login failed , exec seq, pin change etc
