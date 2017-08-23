@@ -1,5 +1,7 @@
 Simple client for Farmbot.
 
+Try it here - https://kimptoc.github.io/farmbot-simple-client/public/
+
 Currently you login, which gets you an auth token, then you can use the
 farmbot-js client ( https://github.com/FarmBot/farmbot-js ) to talk to the bot.
 
