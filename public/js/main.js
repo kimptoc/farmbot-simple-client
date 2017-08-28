@@ -8,6 +8,14 @@ $(function() {
         return val;
     }
     $('#main-bit').hide();
+    $( "#action_toggle" ).click(function() {
+        $('#action_list').toggle();
+    });
+    $( "#controls_toggle" ).click(function() {
+        $('#controls_list').toggle();
+    });
+    $('#action_list').hide();
+    $('#controls_list').hide();
 
     var email = setFieldFromLocalStorage('#email','fb.email');
     var passwd = setFieldFromLocalStorage('#password','fb.password');
@@ -17,7 +25,7 @@ $(function() {
     }
 
     function buildButton(name, id){
-        return '<div><button id="sequence-'+id+'" sequence-id="'+id+'" class="trigger-sequence button button-raised button-action button-pill">'+name+'</button></div>';
+        return '<span><button id="sequence-'+id+'" sequence-id="'+id+'" class="trigger-sequence button button-raised button-action button-pill">'+name+'</button></span>';
     }
 
     function enableSequenceButtons() {
@@ -57,12 +65,20 @@ $(function() {
               if (err) {
                   $('#message').html(err);
               } else {
-                  $('#sequence_list').empty();
-                  $('#sequence_list').append("<h3>Available Sequences:</h3>");
+                  var $sequencelist = $('#sequence_list');
+                  $sequencelist.empty();
+                  $sequencelist.append("<button id='sequence_toggle' class='button button-raised button-rounded'>All Sequences +/-</button>");
+//                  $('#sequence_list').append("<h3>Available Sequences:</h3>");
+                  $sequencelist.append("<span id='all_sequences'></span>")
                   $.each(response.sequences, function (index, sequence) {
-                      $('#sequence_list').append(buildButton(sequence.name, sequence.id))
+                      $('#all_sequences').append(buildButton(sequence.name, sequence.id))
                       enableSequenceButtons();
                   })
+                  $( "#sequence_toggle" ).click(function() {
+//                      log("sequence_toggle");
+                      $('#all_sequences').toggle();
+                  });
+                  $('#all_sequences').hide();
                   $('#message').html('Sequences loaded!');
 
                   //                   console.log(JSON.stringify(response.sequences));
