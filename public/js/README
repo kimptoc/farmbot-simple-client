@@ -4,3 +4,8 @@ $ npm run browserify
 
 But doesn't always work - so you might need to run command yourself.
 
+
+# favourites
+- store in localstorage, use JSON stringify/parse to store/get
+- favourite button next to each, to add to fav object/store in local storage/update favourite section
+- section of favourites, which trigger corresponding sequences
