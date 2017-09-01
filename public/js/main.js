@@ -69,7 +69,7 @@ $(function() {
                   $sequencelist.empty();
                   $sequencelist.append("<button id='sequence_toggle' class='button button-raised button-rounded'>All Sequences +/-</button>");
 //                  $('#sequence_list').append("<h3>Available Sequences:</h3>");
-                  $sequencelist.append("<span id='all_sequences'></span>")
+                  $sequencelist.append("<span id='all_sequences' class='flow'></span>")
                   $.each(response.sequences, function (index, sequence) {
                       $('#all_sequences').append(buildButton(sequence.name, sequence.id))
                       enableSequenceButtons();
