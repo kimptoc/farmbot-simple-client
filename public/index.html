@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="css/buttons.css">
       <!-- form style thanks to https://www.sanwebe.com/2014/08/css-html-forms-designs#form-1-html -->
     <link rel="stylesheet" href="css/form.css">
+    <style media="screen" type="text/css">
+.flow
+{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+    </style>
   </head>
   <body>
 
@@ -28,17 +36,17 @@
   <div id="main-bit">
       <h3 id='device_status' style="border: 1px solid green; padding: 3px"></h3>
 
-      <span id="sequence_list"></span><p></p>
+      <span id="sequence_list" class="flow"></span><p></p>
 
       <button id='action_toggle' class='button button-raised button-rounded'>Actions +/-</button>
-<span id="action_list">
+<span id="action_list" class="flow">
       <button id='sequences' class="button button-raised button-primary button-pill">Refresh sequences</button>
       <button id='device' class="button button-raised button-primary button-pill">Subscribe to ALL Farmbot events</button>
       <button id='arduino_led' class="button button-raised button-pill button-action">Toggle Arduino LED</button>
 </span><p></p>
 
       <button id='controls_toggle' class='button button-raised button-rounded'>Controls +/-</button>
-<span id="controls_list">
+<span id="controls_list" class="flow">
       <button id='goto_home' class="button button-raised button-pill button-action">Goto Home</button>
       <button id='move_x_higher' class="button button-raised button-pill button-action">X+</button>
       <button id='move_x_lower' class="button button-raised button-pill button-action">X-</button>
