@@ -122,6 +122,12 @@ $(function() {
         getSequences();
       return false;
     });
+    $( "#arduino_pump" ).click(function() {
+        bot.togglePin({pin_number: 10});
+    });
+    $( "#arduino_water" ).click(function() {
+        bot.togglePin({pin_number: 9});
+    });
     $( "#arduino_led" ).click(function() {
         bot.togglePin({pin_number: 13});
     });
