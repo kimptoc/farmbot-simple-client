@@ -1,3 +1,4 @@
+
 $(function() {
 
     function setFieldFromLocalStorage(fieldRef, storageKey){
@@ -57,6 +58,26 @@ $(function() {
         });
     }
 
+    function setup_sequence_buttons(response, target_element, button_title, demo_only) {
+        var $sequencelist = $("#"+target_element);
+        $sequencelist.empty();
+        var toggle_button = target_element+'_toggle';
+        $sequencelist.append("<button id='"+toggle_button+"' class='button button-raised button-rounded'>"+button_title+"</button>");
+        var all_buttons = "all_"+target_element;
+        $sequencelist.append("<span id='"+all_buttons+"' class='flow'></span>")
+        $.each(response.sequences, function (index, sequence) {
+            if ( (demo_only && /demo/i.test(sequence.name)) || (!demo_only && !/demo/i.test(sequence.name)) ) {
+                $('#' + all_buttons).append(buildButton(sequence.name.toUpperCase(), sequence.id))
+                enableSequenceButtons();
+            }
+        })
+        $("#"+toggle_button).click(function () {
+            $('#'+all_buttons).toggle();
+        });
+        if (!demo_only) $('#'+all_buttons).hide();
+        $('#message').html('Sequences loaded!');
+    }
+
     function getSequences(){
         $('#sequences').prop('disabled', true);
         $('#message').html('Loading sequences...');
@@ -65,23 +86,8 @@ $(function() {
               if (err) {
                   $('#message').html(err);
               } else {
-                  var $sequencelist = $('#sequence_list');
-                  $sequencelist.empty();
-                  $sequencelist.append("<button id='sequence_toggle' class='button button-raised button-rounded'>All Sequences +/-</button>");
-//                  $('#sequence_list').append("<h3>Available Sequences:</h3>");
-                  $sequencelist.append("<span id='all_sequences' class='flow'></span>")
-                  $.each(response.sequences, function (index, sequence) {
-                      $('#all_sequences').append(buildButton(sequence.name, sequence.id))
-                      enableSequenceButtons();
-                  })
-                  $( "#sequence_toggle" ).click(function() {
-//                      log("sequence_toggle");
-                      $('#all_sequences').toggle();
-                  });
-                  $('#all_sequences').hide();
-                  $('#message').html('Sequences loaded!');
-
-                  //                   console.log(JSON.stringify(response.sequences));
+                  setup_sequence_buttons(response, 'sequence_list','All Sequences +/-', false);
+                  setup_sequence_buttons(response, 'demo_sequence_list','Demo Sequences +/-', true);
               }
           });
 
