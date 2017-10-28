@@ -149,28 +149,34 @@ $(function() {
         bot.moveAbsolute({x:0, y:0, z:0});
     });
     $( "#move_x_higher" ).click(function() {
-      $('#message').html('Moving to X 100 forward...');
-        bot.moveRelative({x:+100, y:0, z:0});
+      var distance = $('#distance').val();
+      $('#message').html('Moving to X '+distance+' forward...');
+      bot.moveRelative({x:+distance, y:0, z:0});
     });
     $( "#move_x_lower" ).click(function() {
-      $('#message').html('Moving to X 100 back...');
-        bot.moveRelative({x:-100, y:0, z:0});
+      var distance = $('#distance').val();
+      $('#message').html('Moving to X '+distance+' back...');
+      bot.moveRelative({x:-distance, y:0, z:0});
     });
     $( "#move_y_higher" ).click(function() {
-      $('#message').html('Moving to Y 100 forward...');
-        bot.moveRelative({x:0, y:+100, z:0});
+      var distance = $('#distance').val();
+      $('#message').html('Moving to Y '+distance+' forward...');
+      bot.moveRelative({x:0, y:+distance, z:0});
     });
     $( "#move_y_lower" ).click(function() {
-      $('#message').html('Moving to Y 100 back...');
-        bot.moveRelative({x:0, y:-100, z:0});
+      var distance = $('#distance').val();
+      $('#message').html('Moving to Y '+distance+' back...');
+      bot.moveRelative({x:0, y:-distance, z:0});
     });
     $( "#move_z_higher" ).click(function() {
-      $('#message').html('Moving to Z 100 forward...');
-        bot.moveRelative({x:0, y:0, z:+100});
+      var distance = $('#distance').val();
+      $('#message').html('Moving to Z '+distance+' forward...');
+      bot.moveRelative({x:0, y:0, z:+distance});
     });
     $( "#move_z_lower" ).click(function() {
-      $('#message').html('Moving to Z 100 back...');
-        bot.moveRelative({x:0, y:0, z:-100});
+      var distance = $('#distance').val();
+      $('#message').html('Moving to Z '+distance+' back...');
+      bot.moveRelative({x:0, y:0, z:-distance});
     });
     $( "#device" ).click(function() {
       $('#message').html('working...');
