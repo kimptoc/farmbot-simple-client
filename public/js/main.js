@@ -137,6 +137,9 @@ $(function() {
     $( "#arduino_led" ).click(function() {
         bot.togglePin({pin_number: 13});
     });
+    $( "#take_photo" ).click(function() {
+        bot.takePhoto({});
+    });
     $( "#logout" ).click(function() {
         $('#login-bit').slideDown();
         $('#main-bit').slideUp();
