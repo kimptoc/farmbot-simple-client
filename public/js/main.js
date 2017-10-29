@@ -29,6 +29,11 @@ $(function() {
         return '<span><button id="sequence-'+id+'" sequence-id="'+id+'" class="trigger-sequence button button-raised button-action button-pill">'+name+'</button></span>';
     }
 
+    function buildImageLink(id, attachment_processed_at, created_at, updated_at, attachment_url, x, y ){
+        return '<a href="'+attachment_url+'" target="_blank">'+id+'</a>&nbsp;&nbsp;';
+        //return '<span><button id="sequence-'+id+'" sequence-id="'+id+'" class="trigger-sequence button button-raised button-action button-pill">'+name+'</button></span>';
+    }
+
     function enableSequenceButtons() {
         $(".trigger-sequence" ).off("click");
         $(".trigger-sequence" ).on("click",function(data) {
@@ -67,7 +72,7 @@ $(function() {
         $sequencelist.append("<span id='"+all_buttons+"' class='flow'></span>")
         $.each(response.sequences, function (index, sequence) {
             if ( (demo_only && /demo/i.test(sequence.name)) || (!demo_only && !/demo/i.test(sequence.name)) ) {
-                $('#' + all_buttons).append(buildButton(sequence.name.toUpperCase(), sequence.id))
+                $('#' + all_buttons).append(buildButton(sequence.name.toUpperCase(), sequence.id));
                 enableSequenceButtons();
             }
         })
@@ -76,6 +81,27 @@ $(function() {
         });
         if (!demo_only) $('#'+all_buttons).hide();
         $('#message').html('Sequences loaded!');
+    }
+
+    function setup_images(response, target_element, button_title, demo_only) {
+        var $sequencelist = $("#"+target_element);
+        $sequencelist.empty();
+        var toggle_button = target_element+'_toggle';
+        $sequencelist.append("<button id='"+toggle_button+"' class='button button-raised button-rounded'>"+button_title+"</button>");
+        var all_buttons = "all_"+target_element;
+        $sequencelist.append("<span id='"+all_buttons+"' class='flow'></span>")
+        $.each(response.images, function (index, image) {
+            // console.log(sequence);
+            // attachment_processed_at, created_at, updated_at, attachment_url, meta.x, meta.y, 
+            $('#' + all_buttons).append(buildImageLink(image.id, image.attachment_processed_at, 
+            image.created_at, image.updated_at, image.attachment_url, image.meta.x, image.meta.y));
+            // enableSequenceButtons();
+        })
+        $("#"+toggle_button).click(function () {
+            $('#'+all_buttons).toggle();
+        });
+        $('#'+all_buttons).hide();
+        $('#message').html('Images loaded!');
     }
 
     function getSequences(){
@@ -88,6 +114,20 @@ $(function() {
               } else {
                   setup_sequence_buttons(response, 'sequence_list','All Sequences +/-', false);
                   setup_sequence_buttons(response, 'demo_sequence_list','Demo Sequences +/-', true);
+              }
+          });
+
+    }
+
+    function getImages(){
+        $('#image_list').prop('disabled', true);
+        $('#message').html('Loading image list...');
+          botui.images(localStorage.getItem('fb.token'), function(err, response) {
+              $('#image_list').prop('disabled', false);
+              if (err) {
+                  $('#message').html(err);
+              } else {
+                  setup_images(response, 'image_list','Images +/-', false);
               }
           });
 
@@ -113,6 +153,7 @@ $(function() {
                         device = new DeviceStatus(bot, '#device_status');
                   });
                   getSequences();
+                  getImages();
                   $('#login-bit').slideUp();
                   $('#main-bit').slideDown();
               }

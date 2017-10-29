@@ -42,6 +42,24 @@
         })
     }
 
+    FarmbotUI.prototype.images = function(token, callback){
+        $.ajax({
+            url: "https://my.farmbot.io/api/images",
+            type: "GET",
+            contentType: "application/json",
+            beforeSend: function(request) {
+              request.setRequestHeader("Authorization", token);
+            },
+            success: function (data) {
+                     // You can now use your token:
+                     callback(null, {images:data});
+                 },
+            error: function( jqXHR, textStatus, errorThrown ) {
+                callback(jqXHR.responseText, null);
+            }
+        })
+    }
+
     root.FarmbotUI = FarmbotUI;
 
 })();
