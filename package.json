@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "atob": "^2.0.3",
-    "farmbot": "^4.0.7",
+    "farmbot": "^5.0.2-rc4",
     "finalhandler": "^1.0.3",
     "serve-static": "^1.12.3"
   },
