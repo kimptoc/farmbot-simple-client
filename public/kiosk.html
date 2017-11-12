@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>Farmbot Simple Kiosk</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/log.js"></script>
+    <script type="text/javascript" src="js/farmbot-browserified.js"></script>
+    <script type="text/javascript" src="js/farmbot-ui.js"></script>
+    <script type="text/javascript" src="js/device-status.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/kiosk.js"></script>
+      <!-- button styles thanks to http://unicorn-ui.com/buttons/ -->
+    <link rel="stylesheet" href="css/buttons.css">
+      <!-- form style thanks to https://www.sanwebe.com/2014/08/css-html-forms-designs#form-1-html -->
+    <link rel="stylesheet" href="css/form.css">
+    <style media="screen" type="text/css">
+.flow
+{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+    </style>
+  </head>
+  <body>
+
+  <div id="login-bit" class="form-style-2">
+      <input hidden="hidden" type='email' id='email' class="input-field">
+      <input hidden="hidden" type='password' id='password' class="input-field">
+  </div>
+
+  <h3 id='message' style="border: 1px solid blue; padding: 3px"></h3>
+
+  <div id="main-bit">
+      <h3 id='device_status' style="border: 1px solid green; padding: 3px"></h3>
+
+      <span id="demo_sequence_list" show_button="false"></span><p></p>
+
+  </div>
+  <div style="margin: 5px">
+<div id='info'></div>
+<div id='debug' hidden="true"></div>
+  </div>
+  </body>
+</html>

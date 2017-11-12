@@ -65,9 +65,17 @@ $(function() {
 
     function setup_sequence_buttons(response, target_element, button_title, demo_only) {
         var $sequencelist = $("#"+target_element);
+        var show_toggle_button = ( $('#'+target_element).attr('show_button') != 'false' );
         $sequencelist.empty();
-        var toggle_button = target_element+'_toggle';
-        $sequencelist.append("<button id='"+toggle_button+"' class='button button-raised button-rounded'>"+button_title+"</button>");
+
+        if (show_toggle_button) {
+            var toggle_button = target_element + '_toggle';
+            $sequencelist.append("<button id='" + toggle_button + "' class='button button-raised button-rounded'>" + button_title + "</button>");
+            $("#" + toggle_button).click(function () {
+                $('#' + all_buttons).toggle();
+            });
+        }
+
         var all_buttons = "all_"+target_element;
         $sequencelist.append("<span id='"+all_buttons+"' class='flow'></span>")
         $.each(response.sequences, function (index, sequence) {
@@ -76,9 +84,6 @@ $(function() {
                 enableSequenceButtons();
             }
         })
-        $("#"+toggle_button).click(function () {
-            $('#'+all_buttons).toggle();
-        });
         if (!demo_only) $('#'+all_buttons).hide();
         $('#message').html('Sequences loaded!');
     }
@@ -133,6 +138,19 @@ $(function() {
 
     }
 
+    function getDevice(device_info){
+          botui.device(localStorage.getItem('fb.token'), function(err, response) {
+              if (err) {
+                  $('#message').html(err);
+              } else {
+//                  log_object(response);
+                  device_info['info'] = response;
+                  log_object(device_info);
+              }
+          });
+
+    }
+
     function doLogin(){
         $('#login').prop('disabled', true);
         localStorage.setItem('fb.email',$('#email').val());
@@ -145,15 +163,17 @@ $(function() {
               if (err) {
                   $('#message').html(err);
               } else {
+                  device_info = {};
                   localStorage.setItem('fb.token', response.token);
                   $('#debug').html(JSON.stringify(response.raw_response));
                   bot = new Farmbot.Farmbot({token: localStorage.getItem('fb.token'), timeout: 30000});
                   bot.connect()
                       .then(function(){
-                        device = new DeviceStatus(bot, '#device_status');
+                        device = new DeviceStatus(bot, '#device_status', device_info);
                   });
                   getSequences();
                   getImages();
+                  getDevice(device_info);
                   $('#login-bit').slideUp();
                   $('#main-bit').slideDown();
               }

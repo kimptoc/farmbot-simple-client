@@ -24,6 +24,25 @@
     }
 
 
+    FarmbotUI.prototype.device = function(token, callback){
+        $.ajax({
+            url: "https://my.farmbot.io/api/device",
+            type: "GET",
+            contentType: "application/json",
+            beforeSend: function(request) {
+              request.setRequestHeader("Authorization", token);
+            },
+            success: function (data) {
+                     // You can now use your token:
+                log_object(data);
+                     callback(null, {device:data});
+                 },
+            error: function( jqXHR, textStatus, errorThrown ) {
+                callback(jqXHR.responseText, null);
+            }
+        })
+    }
+
     FarmbotUI.prototype.sequences = function(token, callback){
         $.ajax({
             url: "https://my.farmbot.io/api/sequences",
