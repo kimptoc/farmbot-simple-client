@@ -26,11 +26,11 @@ $(function() {
     }
 
     function buildButton(name, id){
-        return '<span><button id="sequence-'+id+'" sequence-id="'+id+'" class="trigger-sequence button button-raised button-action button-pill">'+name+'</button> </span>';
+        return '<span> &nbsp;<button id="sequence-'+id+'" sequence-id="'+id+'" class="trigger-sequence button button-raised button-action button-pill">'+name+'</button>&nbsp; </span>';
     }
 
     function buildImageLink(id, attachment_processed_at, created_at, updated_at, attachment_url, x, y ){
-        return '<a href="'+attachment_url+'" target="_blank">'+id+'</a> ';
+        return ' &nbsp;<a href="'+attachment_url+'" target="_blank">'+id+'</a>&nbsp; ';
         //return '<span><button id="sequence-'+id+'" sequence-id="'+id+'" class="trigger-sequence button button-raised button-action button-pill">'+name+'</button></span>';
     }
 
