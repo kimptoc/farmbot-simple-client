@@ -10,6 +10,6 @@ var server = http.createServer(function(req, res) {
       serve(req, res, done);
 });
 
-var listenPort = 8000;
+var listenPort = 8080;
 server.listen(listenPort);
 console.log('Static server started on port '+listenPort);
