@@ -26,7 +26,7 @@ $(function() {
     }
 
     function buildButton(name, id){
-        return '<span> &nbsp;<button id="sequence-'+id+'" sequence-id="'+id+'" class="trigger-sequence button button-raised button-action button-pill">'+name+'</button>&nbsp; </span>';
+        return '<span> &nbsp;<button id="sequence-'+id+'" sequence-id="'+id+'" class="trigger-sequence button button-raised button-action button-pill" style="margin-top: 0.3em;margin-bottom:0.3em;">'+name+'</button>&nbsp; </span>';
     }
 
     function buildImageLink(id, attachment_processed_at, created_at, updated_at, attachment_url, x, y ){
